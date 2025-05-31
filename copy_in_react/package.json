@@ -1,0 +1,36 @@
+{
+  "name": "more-camera-utils",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@chakra-ui/react": "^2.9.5",
+    "@emotion/react": "^11.12.0",
+    "@emotion/styled": "^11.12.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "framer-motion": "^10.18.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "scrollex": "^2.0.1",
+    "vite": "^6.3.5"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

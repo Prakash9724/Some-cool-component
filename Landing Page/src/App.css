@@ -1,0 +1,240 @@
+/* App container */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: var(--text-color);
+  /* Removed background-color from here to allow StarField to be visible */
+}
+
+/* Content container */
+.content {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1; /* Ensure content is above StarField if StarField has z-index: -1 */
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem; /* Add some horizontal padding */
+  background-color: transparent; /* Ensure content area doesn't block starfield */
+}
+
+/* Navbar styles */
+.navbar {
+  width: 100%;
+  padding: 1.5rem 0; /* Adjusted padding */
+  position: relative;
+  z-index: 10; /* Ensure navbar is above starfield */
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.75rem; /* Slightly adjusted size */
+  color: var(--text-color); /* Default color */
+  cursor: pointer;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo:hover {
+  color: #fff; /* Brighter on hover */
+}
+
+.nav-links-container {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem; /* Adjusted gap */
+}
+
+.nav-link-item {
+  color: rgba(255, 255, 255, 0.75); /* Slightly dimmer for non-active links */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem; /* Slightly adjusted size */
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link-item:hover {
+  color: var(--text-color);
+}
+
+.get-started-btn {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.7rem 1.4rem; /* Adjusted padding */
+  border-radius: 6px; /* Slightly less rounded */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none; /* Hidden by default */
+  z-index: 15;
+}
+
+.mobile-menu-btn button {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Hero section styles */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem; /* Adjusted padding */
+  text-align: center;
+}
+
+.hero-container {
+  max-width: 750px; /* Slightly adjusted max-width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem; /* Adjusted gap */
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem); /* Responsive font size */
+  font-weight: 700; /* Bold as per image */
+  line-height: 1.15;
+  color: var(--text-color);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #4ade80, #3b82f6); /* Green to Blue gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 550px;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  max-width: 520px; /* Adjusted max-width */
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden; /* To ensure button fits well */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.app-input {
+  flex: 1;
+  padding: 0.9rem 1.2rem;
+  border: none; /* Remove individual border */
+  background-color: transparent; /* Use parent background */
+  color: var(--text-color);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.app-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.generate-btn {
+  padding: 0.9rem 1.5rem;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 0; /* Remove individual radius */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.hero-tagline {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 1rem;
+  }
+
+  .nav-links-container {
+    display: none; /* Hide desktop links */
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Adjust based on navbar height */
+    left: 0;
+    right: 0;
+    background-color: rgba(15, 15, 26, 0.98); /* Darker, more opaque background */
+    padding: 1.5rem;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+    gap: 1rem;
+  }
+
+  .nav-links-container.mobile-open {
+    display: flex; /* Show when mobile menu is open */
+  }
+
+  .nav-link-item {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links-container .get-started-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  .mobile-menu-btn {
+    display: block; /* Show mobile menu button */
+  }
+  
+  .input-group {
+    flex-direction: column;
+    gap: 0.8rem;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .app-input,
+  .generate-btn {
+    border-radius: 6px; /* Consistent border radius */
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .app-input {
+     background-color: rgba(255, 255, 255, 0.05);
+  }
+}
