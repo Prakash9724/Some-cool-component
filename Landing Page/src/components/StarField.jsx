@@ -116,17 +116,25 @@ const StarField = () => {
               zIndex: 1,
             }}
             animate={{
-              opacity: [star.opacity, glowOpacity, star.opacity],
-              scale: [1, scale, 1],
+              scale: isNearMouse ? 1.8 : 1,
+              opacity: isNearMouse ? 1 : star.opacity,
               boxShadow: isNearMouse
-                ? `0 0 ${star.size * 3}px ${star.size * 1.5}px rgba(255, 255, 220, 0.7)`
-                : `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.7})`,
+                ? `0 0 ${star.size * 3}px rgba(255, 255, 220, 0.7)`
+                : `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.1})`,
             }}
             transition={{
-              duration: star.blinkDuration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: Math.random() * star.blinkDuration, // Stagger blink animations
+              // For hover effect (isNearMouse)
+              scale: { duration: 0.2, ease: "easeOut" },
+              opacity: { duration: 0.2, ease: "easeOut" },
+              boxShadow: { duration: 0.2, ease: "easeOut" },
+              // For blinking effect (when not near mouse)
+              default: {
+                duration: star.blinkDuration,
+                repeat: Infinity,
+                repeatType: 'mirror',
+                ease: 'easeInOut',
+                delay: star.blinkDelay,
+              }
             }}
           />
         );
