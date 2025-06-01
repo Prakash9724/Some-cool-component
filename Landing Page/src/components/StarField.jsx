@@ -14,16 +14,19 @@ const StarField = () => {
     const { clientWidth, clientHeight } = containerRef.current;
 
     const generateStars = () => {
-      const starCount = Math.floor((clientWidth * clientHeight) / 8000); // Adjust density
+      const starCount = Math.floor((clientWidth * clientHeight) / 5000); // Increased density
       const newStars = [];
       for (let i = 0; i < starCount; i++) {
         newStars.push({
           id: `star-${i}`,
           x: Math.random() * clientWidth,
           y: Math.random() * clientHeight,
-          size: Math.random() * 1.5 + 0.5, // Size between 0.5-2px
-          opacity: Math.random() * 0.4 + 0.2, // Opacity between 0.2-0.6
+          size: Math.random() * 2 + 0.5, // Size between 0.5-2.5px
+          opacity: Math.random() * 0.5 + 0.3, // Opacity between 0.3-0.8
           blinkDuration: Math.random() * 4 + 3, // Blink duration between 3-7s
+          blinkDelay: Math.random() * 5, // Random delay for natural blinking
+          randomGlow: Math.random() > 0.7, // 30% of stars will randomly glow
+          randomGlowDuration: Math.random() * 3 + 1, // Random glow duration between 1-4s
         });
       }
       setStars(newStars);
@@ -116,25 +119,62 @@ const StarField = () => {
               zIndex: 1,
             }}
             animate={{
-              scale: isNearMouse ? 1.8 : 1,
-              opacity: isNearMouse ? 1 : star.opacity,
+              scale: isNearMouse 
+                ? 2.2 // Increased scale on hover
+                : star.randomGlow 
+                  ? [1, 1.5, 1] // Random glow animation
+                  : 1,
+              opacity: isNearMouse 
+                ? 1 
+                : star.randomGlow 
+                  ? [star.opacity, star.opacity + 0.4, star.opacity] // Pulse opacity for random glow
+                  : star.opacity,
               boxShadow: isNearMouse
-                ? `0 0 ${star.size * 3}px rgba(255, 255, 220, 0.7)`
-                : `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.1})`,
+                ? `0 0 ${star.size * 5}px rgba(255, 255, 220, 0.9)` // Increased glow intensity
+                : star.randomGlow
+                  ? [
+                      `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.1})`,
+                      `0 0 ${star.size * 3}px rgba(255, 255, 220, 0.5)`,
+                      `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.1})`
+                    ]
+                  : `0 0 ${star.size * 1.5}px rgba(255, 255, 255, ${star.opacity * 0.1})`,
             }}
             transition={{
               // For hover effect (isNearMouse)
               scale: { duration: 0.2, ease: "easeOut" },
               opacity: { duration: 0.2, ease: "easeOut" },
               boxShadow: { duration: 0.2, ease: "easeOut" },
-              // For blinking effect (when not near mouse)
-              default: {
-                duration: star.blinkDuration,
-                repeat: Infinity,
-                repeatType: 'mirror',
-                ease: 'easeInOut',
-                delay: star.blinkDelay,
-              }
+              // For random glowing effect
+              ...(star.randomGlow && {
+                scale: {
+                  duration: star.randomGlowDuration,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  ease: 'easeInOut',
+                },
+                opacity: {
+                  duration: star.randomGlowDuration,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  ease: 'easeInOut',
+                },
+                boxShadow: {
+                  duration: star.randomGlowDuration,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  ease: 'easeInOut',
+                },
+              }),
+              // For regular blinking effect (when not near mouse and not randomly glowing)
+              ...(!isNearMouse && !star.randomGlow && {
+                default: {
+                  duration: star.blinkDuration,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  ease: 'easeInOut',
+                  delay: star.blinkDelay,
+                }
+              })
             }}
           />
         );

@@ -7,6 +7,7 @@ import Hero from './components/Hero'
 // Import fonts
 import '@fontsource/inter'
 import '@fontsource/poppins'
+import Second from './components/Second'
 
 function App() {
   // Set dark theme on body
@@ -24,6 +25,7 @@ function App() {
         <Navbar />
         <main>
           <Hero />
+          <Second/>
         </main>
       </div>
     </div>
